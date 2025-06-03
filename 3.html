@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <canvas id="particleCanvas"></canvas>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>简历</title>
     <style>
-        body {
+         body {
             margin: 0;
             padding: 0;
             height: 100vh;
@@ -13,6 +18,12 @@
             background-size: 200% 200%;
             font-family: 'Arial', sans-serif;
             color: white;
+         }
+        #particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
         }
         .content {
             display: flex;
@@ -82,7 +93,7 @@
     <div class="content">
         <img src="Hud5on.jpg" alt="Profile Image" class="profile-image">
         <div class="profile-text">
-            <h1>我的简历</h1>
+            <h1 calss="animate__animated animate__fadeInDown">我的简历</h1>
             <div class="personal-info">
                 <h2>基本信息</h2>
                 <div class="personal-info-item">
@@ -109,22 +120,35 @@
             <hr>
             <div class="section">
                 <h2>项目经历</h2>
-                <p><strong>P1</strong> - 软件工程师 (2017年7月 - 至今)</p>
-                <p>参与开发多个web应用程序，负责后端服务的设计与实现，优化系统性能。</p>
-                <p><strong>P2</strong> - 软件工程师 (2017年7月 - 至今)</p>
-                <p>参与开发多个web应用程序，负责后端服务的设计与实现，优化系统性能。</p>
+                <p><strong>基于YOLOv11模型训练农业病虫害识别系统</strong> - 前端设计 (2025年4月 - 5月)</p>
+                <p>参与负责设计PC端布局，美化页面等，调用yolo模型进行识别，实现文件夹内图片批量识别及实时图像识别功能。
+                    调用yolo模型pc进行识别，实现文件夹内图片批量识别及实时图像识别功能。提升农业病虫害防治效率。
+                </p>
+                <p style="margin-top: 50px;"><strong>个人网站</strong> - 前端设计 (2025年6月 - 至今)</p>
+                <p>技术栈：HTML5 / CSS3  / JavaScript  / Git / Animated <br>
+                    全栈式开发：独立设计并实现响应式个人网站，包含首页展示、项目作品集、技术博客<br>
+                    前端技术实践：通过CSS设计并美化页面<br>
+                    使用Animated实现动画效果，提升页面交互体验<br>
+                    通过Canvas绘制动态粒子背景
+                </p>
             </div>
             <div class="section">
                 <h2>技能</h2>
                 <p>编程语言：Python,HTML,CSS,JavaScript</p>
                 <p>熟练掌握PS，熟练使用WPS,World,PPT等办公软件</p>
-                <p>其他：熟悉Linux环境，掌握Docker容器技术，具备良好的问题解决能力</p>
             </div>
             <div class="section">
                 <h2>个人评价</h2>
-                <p>具有强大的自主学习能力</p>
+                <p>🔹 高效自学能力：独立完成个人网站开发全流程，通过CSDN、技术博客、AI辅助等资源解决实际问题<br>
+                    🔹 技术热情驱动：课余主动投入技术实践，学习新知识<br>
+                    🔹 快速成长潜力：实践出真知，希望在实战项目中深化技术理解，成长自己</p>
+            </div>
+            <div class="section">
+                <h2>求职意向</h2>
+                <p>前端/后端</p>
             </div>
         </div>
     </div>
+    <script src="3.js"></script>
 </body>
 </html>
