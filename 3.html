@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <canvas id="particleCanvas"></canvas>
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>简历</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
          body {
             margin: 0;
@@ -23,6 +19,8 @@
             position: fixed;
             top: 0;
             left: 0;
+            width: 100%;
+            height: 100%;
             z-index: -1;
         }
         .content {
@@ -87,13 +85,37 @@
         .section {
             margin-bottom: 30px;
         }
+
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+                padding: 10px;
+            }
+            .profile-image {
+                width: 100px;
+                height: 100px;
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.2em;
+            }
+            p {
+                font-size: 0.9em;
+            }
+        }
     </style>
 </head>
 <body>
+    <canvas id="particleCanvas"></canvas>
     <div class="content">
         <img src="Hud5on.jpg" alt="Profile Image" class="profile-image">
         <div class="profile-text">
-            <h1 calss="animate__animated animate__fadeInDown">我的简历</h1>
+            <h1 class="animate__animated animate__fadeInDown">我的简历</h1>
             <div class="personal-info">
                 <h2>基本信息</h2>
                 <div class="personal-info-item">
@@ -127,9 +149,9 @@
                 <p style="margin-top: 50px;"><strong>个人网站</strong> - 前端设计 (2025年6月 - 至今)</p>
                 <p>技术栈：HTML5 / CSS3  / JavaScript  / Git / Animated <br>
                     全栈式开发：独立设计并实现响应式个人网站，包含首页展示、项目作品集、技术博客<br>
-                    前端技术实践：通过CSS设计并美化页面<br>
+                    前端技术实践：采用CSS变量实现主题切换功能，支持亮/暗模式自适应系统偏好<br>
                     使用Animated实现动画效果，提升页面交互体验<br>
-                    通过Canvas绘制动态粒子背景
+                    通过Canvas绘制动态粒子背景，结合鼠标轨迹生成交互式视觉特效
                 </p>
             </div>
             <div class="section">
@@ -149,6 +171,90 @@
             </div>
         </div>
     </div>
-    <script src="3.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('particleCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // 设置Canvas大小
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            // 粒子属性
+            let particles = [];
+            const particleCount = 100; // 粒子数量
+
+            // 监听窗口大小变化事件
+            window.addEventListener('resize', function() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                init(); // 重新初始化粒子
+            });
+
+            // 创建粒子
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width; // 随机水平位置
+                    this.y = canvas.height; // 初始在底部
+                    this.size = Math.random() * 3 + 1; // 随机大小
+                    this.speedY = Math.random() * 2 + 1; // 随机向上速度
+                    this.color = 'rgba(118, 146, 253, ' + (Math.random() * 0.5 + 0.3) + ')'; // 随机透明度
+                }
+
+                // 更新粒子位置
+                update() {
+                    this.y -= this.speedY;
+
+                    // 如果粒子超出顶部，重新从底部开始
+                    if (this.y < -this.size) {
+                        this.reset();
+                    }
+                }
+
+                // 重置粒子位置
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = canvas.height;
+                    this.size = Math.random() * 3 + 1;
+                    this.speedY = Math.random() * 2 + 1;
+                    this.color = 'rgba(118, 146, 253, ' + (Math.random() * 0.5 + 0.3) + ')';
+                }
+
+                // 绘制粒子
+                draw() {
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            // 初始化粒子
+            function init() {
+                particles = [];
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+            }
+
+            // 动画循环
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // 绘制粒子
+                particles.forEach(particle => {
+                    particle.update();
+                    particle.draw();
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            // 启动粒子效果
+            init();
+            animate();
+        });
+    </script>
 </body>
 </html>
