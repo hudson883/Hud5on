@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表的修改</title>
+    <style>
+        h1{
+            text-align: center;
+        }
+        table{
+            width: 50%;
+            border-collapse: collapse;
+            margin: auto;
+        }
+        td,th{
+            border: 1px solid black;
+            text-align: center;
+            padding: 2px;
+            background-color: white;
+        }
+        th{
+            background-color: gray;
+        }
+        button{
+            margin-left: 5px;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between; 
+            align-items: center; 
+    }
+    </style>
+    <h1 style="color: white;">表格的增删改查</h1>
+</head>
+<body style="background-color: #444;">
+    <div class="container">
+        <button onclick="addRow()">新增数据</button>
+        <span id = "time-now" style="text-align: right;color:white;"></span>
+    </div>
+    <table id="table">
+        <tr>
+            <th>姓名</th>
+            <th>联系方式</th>
+            <th>操作</th>
+        </tr>
+        <tr>
+            <td>李世康</td>
+            <td>19878120461</td>
+            <td>
+                <button onclick="editRow(this)">修改</button><button onclick="removeRow(this)">删除</button>
+            </td>
+        </tr>
+    </table>
+    <script src="1.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图库</title>
+    <h1 style="text-align: center;">图库</h1>
+    <style>
+        /* 隐藏原生的文件选择框 */
+        #file-input {
+            display: none;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 隐藏的文件输入框 -->
+        <input type="file" id="file-input" accept="image/*" />
+        <!-- 按钮 -->
+        <button onclick="putfile()">上传图片</button>
+
+    </div>
+    <div>
+        <img src="1.jpg" alt="" width="100">
+        <!-- 隐藏的文件输入框 -->
+        <input type="file" id="file-input" accept="image/*" />
+        <!-- 按钮 -->
+
+        <!-- 显示上传的图片 -->
+        <div id="preview" style="margin-top: 20px;"></div>
+    </div>
+    <script src="2.js"></script>
+</body>
+</html>

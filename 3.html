@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简历</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(#192729 10%, black 60%);
+            background-size: 200% 200%;
+            font-family: 'Arial', sans-serif;
+            color: white;
+        }
+        .content {
+            display: flex;
+            align-items: flex-start;
+            max-width: 800px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+            margin: 40px auto 0;
+        }
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-right: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .profile-text {
+            text-align: left;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 0;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        h2 {
+            color: #7692FD;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+            border-bottom: 2px solid #7692FD;
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+        p {
+            line-height: 1.6;
+            margin: 5px 0;
+        }
+        .personal-info {
+            margin-bottom: 20px;
+        }
+        .personal-info-item {
+            display: flex;
+            margin-bottom: 8px;
+        }
+        .info-label {
+            font-weight: bold;
+            min-width: 100px;
+        }
+        hr {
+            border: none;
+            border-top: 2px solid #7692FD;
+            margin: 30px 0;
+            width: 100%;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <img src="Hud5on.jpg" alt="Profile Image" class="profile-image">
+        <div class="profile-text">
+            <h1>我的简历</h1>
+            <div class="personal-info">
+                <h2>基本信息</h2>
+                <div class="personal-info-item">
+                    <span class="info-label">姓名：</span>
+                    <span>李世康</span>
+                </div>
+                <div class="personal-info-item">
+                    <span class="info-label">出生年月：</span>
+                    <span>2004年5月</span>
+                </div>
+                <div class="personal-info-item">
+                    <span class="info-label">邮箱：</span>
+                    <span>843682800@qq.com</span>
+                </div>
+                <div class="personal-info-item">
+                    <span class="info-label">电话：</span>
+                    <span>198-7812-0461</span>
+                </div>
+                <div class="personal-info-item">
+                    <span class="info-label">学历：</span>
+                    <span>大专(在读)</span>
+                </div>
+            </div>
+            <hr>
+            <div class="section">
+                <h2>项目经历</h2>
+                <p><strong>P1</strong> - 软件工程师 (2017年7月 - 至今)</p>
+                <p>参与开发多个web应用程序，负责后端服务的设计与实现，优化系统性能。</p>
+                <p><strong>P2</strong> - 软件工程师 (2017年7月 - 至今)</p>
+                <p>参与开发多个web应用程序，负责后端服务的设计与实现，优化系统性能。</p>
+            </div>
+            <div class="section">
+                <h2>技能</h2>
+                <p>编程语言：Python,HTML,CSS,JavaScript</p>
+                <p>熟练掌握PS，熟练使用WPS,World,PPT等办公软件</p>
+                <p>其他：熟悉Linux环境，掌握Docker容器技术，具备良好的问题解决能力</p>
+            </div>
+            <div class="section">
+                <h2>个人评价</h2>
+                <p>具有强大的自主学习能力</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
