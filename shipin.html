@@ -42,7 +42,7 @@
             margin-bottom: 20px;
             display: flex;
             flex-direction: column;
-            align-items: center; /* 水平居中 */
+            align-items: center;
         }
         
         video {
@@ -131,6 +131,38 @@
         
         .controls button:hover {
             background-color: #45a049;
+        }
+
+        /* 媒体查询，用于小屏幕设备 */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 10px;
+            }
+            
+            video {
+                max-height: 300px;
+            }
+            
+            .playlist {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .video-item {
+                flex: 0 0 100%;
+                min-width: auto;
+                margin-bottom: 10px;
+            }
+            
+            .thumbnail {
+                height: 80px;
+            }
+            
+            .controls button {
+                padding: 8px 16px;
+                margin: 0 5px;
+            }
         }
     </style>
 </head>

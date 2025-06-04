@@ -70,7 +70,7 @@
             position: fixed; 
             top: 20px; 
             right: 20px; 
-            animation: rotate 5s linear infinite; 
+            animation: rotate 5s linear infinite;
         }
 
         .sidebar {
@@ -84,6 +84,7 @@
             left: 20px; /* 距离左侧的距离 */
             border-radius: 10px;
         }
+
         footer {
             background-color: #333; /* 设置背景颜色 */
             color: white; /* 设置文字颜色 */
@@ -94,6 +95,25 @@
             width: 100%; /* 宽度占满整个页面 */
             box-sizing: border-box;
         }
+
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            .link-container {
+                max-width: calc(100% - 20px); /* 调整最大宽度，以适应小屏幕 */
+            }
+
+            .rotating-image {
+                width: 80px; /* 在小屏幕上减小宽度 */
+                height: 80px; /* 在小屏幕上减小高度 */
+                top: 10px; /* 在小屏幕上调整位置 */
+                right: 10px; /* 在小屏幕上调整位置 */
+            }
+
+            .sidebar {
+                width: calc(100% - 40px); /* 在小屏幕上调整宽度 */
+                left: 20px; /* 在小屏幕上调整位置 */
+            }
+        }
     </style>
 </head>
 <body>
@@ -102,7 +122,7 @@
     </div>
     <img src="Hud5on.jpg" alt="Rotating Image" class="animate__animated animate__fadeInDown rotating-image">
     <h1 class="animate__animated animate__fadeInDown">总览</h1>
-    <div id="time-now" class="animate__animated animate__fadeInDown"><a href="3.html">作者：Hud5on</a></div>
+    <div id="time-now" class="animate__animated animate__fadeInDown"><a href="3.html"></a></div>
 
     <!-- 合并后的链接容器 -->
     <div class="link-container animate__animated animate__fadeInDown animate__delay-1s">
@@ -111,10 +131,12 @@
         <a href="tuxiang.html">图库</a>
         <a href="yinpin.html">音频播放</a>
         <a href="shipin.html">视频播放</a>
-        <a href="#">链接6</a>
+        <a href="rizhi.html">工作日志</a>
     </div>
     <footer>
-        <p>网站用于展示记录Web前端学历历程，将持续完善网站并增加功能。</p>
+        <p>网站用于展示记录Web前端学习历程，将持续完善网站并增加功能。
+           <br> Hud5on
+        </p>
     </footer>
     <script src="1.js"></script>
 </body>
