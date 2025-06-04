@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频播放器</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #1e1e1e;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            overflow: hidden;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* 水平居中 */
+        }
+        
+        video {
+            max-width: 100%;
+            max-height: 450px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: auto;
+            height: auto;
+        }
+        
+        .video-title {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 1.5em;
+            color: #e5e5e5;
+        }
+        
+        .playlist {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+            background-color: #252525;
+            border-radius: 10px;
+            padding: 15px;
+        }
+        
+        .video-item {
+            flex: 0 0 calc(20% - 20px);
+            min-width: 150px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .video-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+        
+        .video-item.active {
+            border: 2px solid #4caf50;
+        }
+        
+        .thumbnail {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .video-item-title {
+            padding: 8px;
+            text-align: center;
+            font-size: 0.9em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            background-color: #2a2a2a;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .controls button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        
+        .controls button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>我的视频播放器</h1>
+        <div class="video-container">
+            <video id="videoPlayer" controls poster="video/咪咪.PNG">
+                <source src="" type="video/mp4">
+                您的浏览器不支持视频播放。
+            </video>
+            <div class="video-title" id="videoTitle">视频标题</div>
+        </div>
+        <div class="controls">
+            <button id="playAll">播放全部</button>
+            <button id="stopAll">停止播放</button>
+        </div>
+        <ul class="playlist">
+            <li class="video-item active" data-src="video/咪咪.mp4" data-title="未满月的小猫咪是怎么喝奶的" data-thumbnail="video/咪咪.PNG">
+                <img src="video/咪咪.PNG" alt="缩略图" class="thumbnail">
+                <div class="video-item-title">未满月的小猫咪是怎么喝奶的</div>
+            </li>
+            <li class="video-item" data-src="video/werwerwer.mp4" data-title="werwerwer" data-thumbnail="video/werwerwer.PNG">
+                <img src="video/werwerwer.PNG" alt="缩略图" class="thumbnail">
+                <div class="video-item-title">werwerwer</div>
+            </li>
+            <li class="video-item" data-src="video3.mp4" data-title="视频 3" data-thumbnail="thumbnail3.jpg">
+                <img src="thumbnail3.jpg" alt="缩略图" class="thumbnail">
+                <div class="video-item-title">视频 3</div>
+            </li>
+            <li class="video-item" data-src="video4.mp4" data-title="视频 4" data-thumbnail="thumbnail4.jpg">
+                <img src="thumbnail4.jpg" alt="缩略图" class="thumbnail">
+                <div class="video-item-title">视频 4</div>
+            </li>
+        </ul>
+    </div>
+    <script src="shipin.js"></script>
+</body>
+</html>

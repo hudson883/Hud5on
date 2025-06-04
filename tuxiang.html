@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图库</title>
+    <style>
+        .sidebar {
+            width: 200px;
+            height: 120px;
+            background-color: #555;
+            color: white;
+            padding: 10px;
+            position: fixed; /* 使用固定定位 */
+            top: 20px; /* 距离顶部的距离 */
+            left: 20px; /* 距离左侧的距离 */
+            border-radius: 10px;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            width: 300px;
+        }
+
+        button {
+            background-color: #7692FD;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #5873DF;
+        }
+
+        img {
+            border-radius: 5px;
+            margin: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        #preview {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar animate__animated animate__fadeInLeft animate__delay-2s">
+        <h2 class="animate__animated animate__flash animate__infinite animate__slow">此静态网页仅用于功能演示，无法实现数据上传！</h2>
+    </div>
+    <h1>图库</h1>
+    <div class="container">
+        <!-- 隐藏的文件输入框 -->
+        <input type="file" id="file-input" accept="image/*" />
+        <!-- 按钮 -->
+        <button onclick="previewImage()">上传图片</button>
+    </div>
+    <div id="preview"></div>
+
+    <script>
+        function previewImage() {
+            const fileInput = document.getElementById('file-input');
+            const previewArea = document.getElementById('preview');
+
+
+            previewArea.innerHTML = '';
+
+            const files = fileInput.files;
+            for (let i = 0; i < files.length; i++) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.width = '100'; // 设置图片宽度
+                    img.height = '100'; // 设置图片高度
+                    previewArea.appendChild(img);
+                };
+                reader.readAsDataURL(files[i]);
+            }
+        }
+    </script>
+</body>
+</html>
