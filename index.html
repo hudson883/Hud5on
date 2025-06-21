@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="daohang.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>主菜单</title>
     <style>
+        
         :root {
             --animate-delay: 0.5s;
         }
@@ -68,7 +70,7 @@
             border-radius: 50%; 
             object-fit: cover; 
             position: fixed; 
-            top: 20px; 
+            top: 60px; 
             right: 20px; 
             animation: rotate 5s linear infinite;
         }
@@ -80,7 +82,7 @@
             color: white;
             padding: 10px;
             position: fixed; /* 使用固定定位 */
-            top: 20px; /* 距离顶部的距离 */
+            top: 60px; /* 距离顶部的距离 */
             left: 20px; /* 距离左侧的距离 */
             border-radius: 10px;
         }
@@ -117,6 +119,8 @@
     </style>
 </head>
 <body>
+    <div id="navbar-container"></div>
+    <div style="height: 48px;"></div>
     <div class="sidebar animate__animated animate__fadeInLeft animate__delay-2s">
         <h2 class="animate__animated animate__flash animate__infinite animate__slow animate__delay-3s">此网页仅用于功能演示！！！</h2>
     </div>
@@ -132,12 +136,16 @@
         <a href="yinpin.html">音频播放</a>
         <a href="shipin.html">视频播放</a>
         <a href="rizhi.html">工作日志</a>
+        <a href="lunbo.html">Vue图片轮播</a>
+        <a href="jishiben.html">Vue记事本</a>
+        <a href="jisuan.html">Vue计算器</a>
     </div>
     <footer>
         <p>网站用于展示记录Web前端学习历程，将持续完善网站并增加功能。
            <br> Hud5on
         </p>
     </footer>
+    <script src="daohang.js"></script>
     <script src="1.js"></script>
 </body>
 </html>

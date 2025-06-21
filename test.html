@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .textColor{
+        color: aqua;
+    }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h2 :class="{textColor:web.fontStatus}">{{ web.img }}</h2>
+        <img :src="web.img" style="height: 300px;">
+        <h2>{{ msg }}</h2>
+        <h2>{{ web.url }}</h2><br>
+        <input type="text" :value="web.url">
+        <h2>{{ number }}</h2>
+        <h2>{{ web.user }}</h2>
+        <h3 v-text="web.title"></h3>
+        <h3 v-html="web.url"></h3>
+        实时渲染 <input type="text" v-model="web.url"> <br>
+        在失去焦点或按下回车键之后渲染 <input type="text" v-model.lazy="web.url"> <br>
+        输入框的值转换为数字类型 <input type="text" v-model.number="web.user"> <br>
+        去除首尾空格 <input type="text" v-model.trim="web.url">
+        <p v-show="web.show">https://hudson883.github.io/Hud5on/</p>
+        <button @click="edit">点击更改信息</button><br>
+        <button @click="toggle">点击切换显示</button><br>
+        回车<input type="text" @keyup.enter="add(40,60)">
+        <p v-if="web.user < 1000">你好吗</p>
+        <p v-else-if="web.user >= 1000 && web.user < 1500">我很好</p>
+        <p v-else>我超好</p>
+        <h3>文本{{ data.text }}</h3>
+        <h3>单选{{ data.radio }}</h3>
+        <h3>复选{{ data.checkbox }}</h3>
+        <h3>记住密码{{ data.remmember }}</h3>
+        <h3>下拉{{ data.select }}</h3>
+        单向数据绑定 <input type="text" :value="data.text">
+        <hr>
+        双向数据绑定 <input type="text" v-model="data.text">
+
+        <hr> 
+        <input type="radio" v-model="data.radio" value="1">写作
+        <input type="radio" v-model="data.radio" value="2">画画
+
+        <hr>
+        <input type="checkbox" v-model="data.checkbox" value="a">写作
+        <input type="checkbox" v-model="data.checkbox" value="b">画画
+        <input type="checkbox" v-model="data.checkbox" value="c">运动
+
+        <hr>
+        <input type="checkbox" v-model="data.remember">记住密码
+
+        <hr>
+        <select v-model="data.select">
+            <option value="">请选择</option>
+            <option value="A">写作</option>
+            <option value="B">画画</option>
+            <option value="C">运动</option>
+        </select><hr>
+        <select v-model="hobby">
+            <option value="">请选择</option>
+            <option value="A">写作</option>
+            <option value="B">画画</option>
+            <option value="C">运动</option>
+        </select>
+
+    </div>
+        <h3>add: {{ add() }}</h3>
+        <h3>add: {{ add() }}</h3>
+        <h3>sum: {{ sub }}</h3>
+        <h3>sum: {{ sub }}</h3>
+        x <input type="text" v-model.number="data.x"> <br>
+        y <input type="text" v-model.number="data.y">
+    </div>
+    <script type="module">
+        import {createApp,reactive,ref,computed,watch} from "./vue.esm-browser.js"
+        
+        createApp({
+            setup(){
+                const hobby = ref("") //爱好
+                const number = ref(10)//ref常用于存储单个基本类型数据，如数字，字符串
+                const web = reactive({//用于存储复杂数据类型，如对象或数组
+                    url:"www.baidu.com",
+                    show:true,
+                    user:100,
+                    img:"Hud5on.jpg",
+                    fontStatus: true
+                })
+                const data = reactive({
+                    text:"baidu.com",//文本框
+                    radio:"",//单选框
+                    checkbox:[],//复选框
+                    remmember: false,//单个复选框-记住密码
+                    select:"",//下拉框
+                    x: 10,
+                    y: 20,
+                    year: "2023",
+                    month: "10"
+                })
+
+            //计算属性-有缓存 [计算属性根据其依赖的响应式数据变化而重新计算]
+                const sub = computed(() => {
+                    console.log("sub") //打印一次
+                    return data.x + data.y
+                })
+                const edit = () =>{
+                    web.url="https://hudson883.github.io/Hud5on/"
+                }
+                let add = () => {
+                    console.log("add") //打印两次
+                    return data.x + data.y
+                }
+                const toggle = () =>{
+                    web.show =! web.show
+                
+                }
+                return{
+                    msg:"你好啊",
+                    web,
+                    number,
+                    edit,
+                    add,
+                    toggle,
+                    data,
+                    sub,
+                    hobby
+                }
+            }
+        }).mount("#app")
+    </script>
+</body>
+</html>

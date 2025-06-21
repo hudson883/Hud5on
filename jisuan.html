@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算器</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+        margin: 0;
+    }
+
+    .calculator {
+        background-color: #282828;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 350px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .display {
+        background-color: #111;
+        color: white;
+        font-size: 24px;
+        text-align: right;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        height: 50px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    button {
+        background-color: #333;
+        color: white;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    button:hover {
+        background-color: #555;
+    }
+
+    .fuhao {
+        background-color: orange;
+    }
+
+    .fuhao:hover {
+        background-color: #e08900;
+    }
+
+    .history {
+        background-color: #111;
+        color: white;
+        font-size: 16px;
+        flex: 1;
+        overflow-y: auto;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+    .history-item {
+        margin-bottom: 5px;
+    }
+</style>
+
+<body>
+    <div id="app" class="calculator">
+        <div class="display">
+            <div>{{ expression }}</div> <!-- 显示当前的表达式 -->
+            <div>{{ display }}</div> <!-- 显示当前的数字或结果 -->
+        </div>
+        <div class="buttons">
+            <button @click="clear">CE</button>
+            <button @click="clearAll">C</button>
+            <button @click="sign">±</button>
+            <button class="fuhao" @click="chu">÷</button>
+            <button @click="append('7')">7</button>
+            <button @click="append('8')">8</button>
+            <button @click="append('9')">9</button>
+            <button class="fuhao" @click="chen">×</button>
+            <button @click="append('4')">4</button>
+            <button @click="append('5')">5</button>
+            <button @click="append('6')">6</button>
+            <button class="fuhao" @click="jian">-</button>
+            <button @click="append('1')">1</button>
+            <button @click="append('2')">2</button>
+            <button @click="append('3')">3</button>
+            <button class="fuhao" @click="jia">+</button>
+            <button @click="append('0')">0</button>
+            <button @click="append('.')">.</button>
+            <button @click="square">x²</button>
+            <button @click="squareRoot">√</button>
+            <button class="fuhao" @click="invert">1/x</button>
+            <button class="fuhao" @click="equal">=</button>
+        </div>
+        <div class="history">
+            <div v-for="(item, index) in history" :key="index" class="history-item">
+                {{ item.expression }} = {{ item.result }}
+            </div>
+        </div>
+    </div>
+    <script type="module">
+        import { createApp, ref } from "./vue.esm-browser.js";
+
+        createApp({
+            setup() {
+                const display = ref("0");
+                const expression = ref("");
+                const history = ref([]);
+                const nowfuhao = ref(null);
+                const firstOperand = ref(null);
+                const waitingForSecondOperand = ref(false);
+
+                // 追加数字到显示
+                function append(number) {
+                    if (display.value === "0" && number !== ".") {
+                        display.value = number;
+                    } else if (number === "." && display.value.includes(".")) {
+                        // 阻止添加多个小数点
+                        return;
+                    } else {
+                        display.value += number;
+                    }
+                }
+
+                // 清除显示（CE）
+                function clear() {
+                    display.value = "0";
+                }
+
+                // 清除所有内容（C）
+                function clearAll() {
+                    display.value = "0";
+                    expression.value = "";
+                    history.value = [];
+                    nowfuhao.value = null;
+                    firstOperand.value = null;
+                    waitingForSecondOperand.value = false;
+                }
+
+                // 设置操作符
+                function setfuhao(fuhao) {
+                    if (nowfuhao.value !== null && waitingForSecondOperand.value) {
+                        // 如果已经在等待第二个操作数，则更新操作符
+                        nowfuhao.value = fuhao;
+                        expression.value = `${firstOperand.value} ${fuhao} `;
+                    } else {
+                        if (firstOperand.value === null) {
+                            firstOperand.value = parseFloat(display.value);
+                        } else {
+                            jisuan();
+                        }
+                        nowfuhao.value = fuhao;
+                        expression.value = `${firstOperand.value} ${fuhao} `;
+                        waitingForSecondOperand.value = true;
+                        display.value = "";
+                    }
+                }
+
+                // 执行加法操作
+                function jia() {
+                    setfuhao("+");
+                }
+
+                // 执行减法操作
+                function jian() {
+                    setfuhao("-");
+                }
+
+                // 执行乘法操作
+                function chen() {
+                    setfuhao("×");
+                }
+
+                // 执行除法操作
+                function chu() {
+                    setfuhao("÷");
+                }
+
+                // 计算结果
+                function jisuan() {
+                    const secondOperand = parseFloat(display.value);
+                    let result;
+
+                    switch (nowfuhao.value) {
+                        case "+":
+                            result = firstOperand.value + secondOperand;
+                            break;
+                        case "-":
+                            result = firstOperand.value - secondOperand;
+                            break;
+                        case "×":
+                            result = firstOperand.value * secondOperand;
+                            break;
+                        case "÷":
+                            result = firstOperand.value / secondOperand;
+                            break;
+                        default:
+                            return;
+                    }
+
+                    // 更新显示和表达式
+                    display.value = result.toString();
+                    expression.value = `${firstOperand.value} ${nowfuhao.value} ${secondOperand} = ${result}`;
+
+                    // 添加到历史记录
+                    history.value.push({
+                        expression: `${firstOperand.value} ${nowfuhao.value} ${secondOperand}`,
+                        result: result
+                    });
+
+                    // 更新第一个操作数为当前结果，准备下一次操作
+                    firstOperand.value = result;
+                    waitingForSecondOperand.value = false;
+                    nowfuhao.value = null;
+                }
+
+                // 等号按钮
+                function equal() {
+                    if (nowfuhao.value !== null && waitingForSecondOperand.value) {
+                        jisuan();
+                    }
+                }
+
+                return {
+                    display,
+                    expression,
+                    history,
+                    append,
+                    clear,
+                    clearAll,
+                    jia,
+                    jian,
+                    chen,
+                    chu,
+                    equal
+                };
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html>
